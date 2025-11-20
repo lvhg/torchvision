@@ -3,7 +3,7 @@
 from typing import ClassVar, List, Mapping, Sequence, Any, Dict, Optional, Union, Tuple
 from typing_extensions import Self
 from viam.components.camera import Camera
-from viam.media.video import ViamImage, CameraMimeType
+from viam.media.video import ViamImage
 from viam.proto.service.vision import Classification, Detection
 from viam.services.vision import Vision, CaptureAllResult
 from viam.module.types import Reconfigurable

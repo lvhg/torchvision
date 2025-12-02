@@ -197,8 +197,8 @@ class TorchVisionService(Vision, Reconfigurable):
                 "is not the configured 'camera_name'",
                 self.camera_name,
             )
-        images = await self.camera.get_images()
-        if len(images) == 0 and (return_image or return_classifications or return_detections):
+        images, _ = await self.camera.get_images()
+        if images is None or len(images) == 0 and (return_image or return_classifications or return_detections):
             raise ValueError("No images returned by get_images")
         if return_image:
             result.image = images[0]
@@ -364,8 +364,8 @@ class TorchVisionService(Vision, Reconfigurable):
 
     async def get_image_from_dependency(self, camera_name: str):
         # cam = self.dependencies[Camera.get_resource_name("")]
-        imgs = await self.camera.get_images()
-        if len(imgs) == 0:
+        imgs, _ = await self.camera.get_images()
+        if imgs is None or len(imgs) == 0:
             raise ValueError("No images returned by get_images")
         return decode_image(imgs[0])
 

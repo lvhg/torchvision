@@ -90,7 +90,7 @@ class TestVision:
         camera.camera_name = "fake_cam"
 
         camera.reconfigure(cfg, dependencies={"fake_cam": Mock()})
-        camera.camera.get_images = AsyncMock(return_value=[pil_to_viam_image(image, mime_type=CameraMimeType.JPEG)])
+        camera.camera.get_images, _ = AsyncMock(return_value=[pil_to_viam_image(image, mime_type=CameraMimeType.JPEG)])
 
         # without point clouds = True
         result = asyncio.run(camera.capture_all_from_camera(
@@ -126,7 +126,7 @@ class TestVision:
         )
 
         vs.reconfigure(cfg, dependencies={"fake_cam": Mock()})
-        vs.camera.get_images = AsyncMock(return_value=[pil_to_viam_image(image, mime_type=CameraMimeType.JPEG)])
+        vs.camera.get_images, _ = AsyncMock(return_value=[pil_to_viam_image(image, mime_type=CameraMimeType.JPEG)])
 
         result = vs.get_classifications_from_camera(
             "",
